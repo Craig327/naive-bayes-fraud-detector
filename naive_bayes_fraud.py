@@ -789,7 +789,7 @@ def calculate_confusion_matrix(true_labels, predicted_labels):
 
 def print_evaluation_report(title, true_labels, predicted_labels):
     """
-    Print accuracy, precision, recall, and F1-score for a set of
+    Print accuracy, precision, and recall for a set of
     predictions, along with the confusion matrix they came from.
 
     Why not just use accuracy? Only about 1.7% of our transactions are
@@ -801,7 +801,6 @@ def print_evaluation_report(title, true_labels, predicted_labels):
                    actually were fraud?
       recall    -> of the transactions that really were fraud, how many
                    did we catch?
-      F1-score  -> a single number balancing precision and recall
     """
     true_positives, true_negatives, false_positives, false_negatives = \
         calculate_confusion_matrix(true_labels, predicted_labels)
@@ -819,11 +818,6 @@ def print_evaluation_report(title, true_labels, predicted_labels):
     else:
         recall = 0.0
 
-    if (precision + recall) > 0:
-        f1_score = 2 * precision * recall / (precision + recall)
-    else:
-        f1_score = 0.0
-
     print()
     print(f"--- {title} ---")
     print("Confusion matrix (rows = actual, columns = predicted):")
@@ -833,7 +827,6 @@ def print_evaluation_report(title, true_labels, predicted_labels):
     print(f"Accuracy:  {accuracy:.4f}  (misleading on its own - only ~1.7% of rows are fraud)")
     print(f"Precision: {precision:.4f}  (of the fraud alerts we raised, how many were real)")
     print(f"Recall:    {recall:.4f}  (of the real fraud cases, how many we actually caught)")
-    print(f"F1 score:  {f1_score:.4f}  (balance between precision and recall)")
 
 
 def print_example_predictions(model, numeric_rows, category_rows, labels, how_many=5):
